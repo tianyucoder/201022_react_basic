@@ -2,9 +2,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Hello_react?????</title>
+		<title>Hello_react</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
 	</head>
 	<body>
-		
+		<!-- 准备好一个容器，后期react会往其中加入结构 -->
+		<div id="test"></div>
+
+		<script type="text/babel"> /* 此处一定要写babel，因为我们写的是jsx脚本，要靠babel解析为js */
+			//1.创建虚拟DOM
+			const VDOM = <h1>Hello,React</h1> /* 此处一定不要加引号，因为这是jsx不是js */
+			//2.将虚拟DOM转为真实DOM，放在页面指定位置
+			ReactDOM.render(VDOM,document.getElementById('test'))
+		</script>
 	</body>
 </html>
