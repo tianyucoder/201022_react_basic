@@ -16,9 +16,9 @@
 
 		<script type="text/babel"> /* 此处一定要写babel，因为我们写的是jsx脚本，要靠babel解析为js */
 			//1.创建虚拟DOM
-			const VDOM = <h1>Hello,React</h1> /* 此处一定不要加引号，因为这是jsx不是js */
+			const VDOM = <h1>Hello,React</h1> /* 此处一定不要加引号，因为不是字符串，这是jsx语法 */
 			//2.将虚拟DOM转为真实DOM，放在页面指定位置
-			ReactDOM.render(VDOM,document.getElementById('test'))
+			ReactDOM.render(VDOM,document.getElementById('test')) //该句话不是追加，是替换
 		</script>
 	</body>
 </html>
