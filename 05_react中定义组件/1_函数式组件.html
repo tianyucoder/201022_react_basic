@@ -14,7 +14,7 @@
 		<div id="test"></div>
 
 		<script type="text/babel" >
-			//1.定义一个组件
+			//1.定义一个组件（函数式）
 			function Demo (){
 				console.log(this) //此处的this是谁？———— undefined，因为jsx编译为js后babel开启了严格模式
 				return <h2>我是用函数定义的组件（适用于：【简单组件】的定义）</h2>
@@ -22,12 +22,12 @@
 			//2.渲染组件到页面
 			ReactDOM.render(<Demo/>,document.getElementById('test'))
 			/* 
-				执行了ReactDOM.render(<Peiqi/>.......之后，发生了什么？
-						1.React解析组件标签，寻找Peiqi组件:
+				执行了ReactDOM.render(<Demo/>.......之后，发生了什么？
+						1.React解析组件标签，寻找Demo组件:
 								(1).若找到了，则进行下一步
-								(2).若未找到，则报错：Peiqi is not defined
-						2.React发现Peiqi是用函数定义的，React调用Peiqi函数，将返回的虚拟DOM结构渲染到页面。
-						3.备注：
+								(2).若未找到，则报错：Demo is not defined
+						2.React发现Demo是用函数定义的，React调用Demo函数，将返回的虚拟DOM结构渲染到页面。
+						备注：
 								所谓的简单组件，就是没有状态的组件
 								所谓的复杂组件，就是有状态的组件
 								什么又是状态呢？———— 后续章节会详细的讲解

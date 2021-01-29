@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>2_类式组件</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+			//1.定义组件（类式）
+			class Demo extends React.Component{
+				render(){
+					//render方法是放在哪里的？ —— Demo的原型对象上，供实例去使用
+					//render中的this是谁？ —— Demo的实例对象
+					//这几个词儿是一个意思： Demo类的实例对象 <=> Demo组件的实例对象
+					console.log('@@',this)
+					return <h2>我是用类定义的组件（适用于：【复杂组件】的定义）</h2>
+				}
+			}
+			//2.渲染组件到页面
+			ReactDOM.render(<Demo/>,document.getElementById('test'))
+			/* 
+					执行了ReactDOM.render(<Demo/>......后发生了什么？
+							1.React解析组件标签,寻找Demo组件
+									(1).若找到了，则进行第2步
+									(2).若未找到，则报错：Demo is not defined
+							2.发现组件是使用类定义的，随后React帮我们去new了一个Demo的实例：d
+								并通过d调用到了Demo原型上的render方法，即：d.render()
+								备注：此处的d只是我们分析问题时的一个代号，React底层用的是别的名字。
+							3.将render返回的虚拟DOM结构渲染到页面
+			*/
+		</script>
+		
+	</body>
+</html>
