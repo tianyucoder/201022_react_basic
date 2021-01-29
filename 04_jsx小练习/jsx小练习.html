@@ -38,12 +38,15 @@
 					<h1>前端框架列表</h1>	
 					<ul>
 						{
-							/* arr.map((item,index)=>{
-								return <li key={index}>{item}</li>
-							}) */
-							arr.forEach((item,index)=>{
+							//map方法专门用于加工数组，React中大量使用map方法
+							arr.map((item,index)=>{
 								return <li key={index}>{item}</li>
 							})
+
+							//不能使用forEach，因为返回值永远是undefined
+							/* arr.forEach((item,index)=>{
+								return <li key={index}>{item}</li>
+							}) */
 						}
 					</ul>
 				</div>
