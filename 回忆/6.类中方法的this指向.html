@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<button id="btn">点我</button>
+		<script type="text/javascript" >
+			const btn = document.getElementById('btn')
+
+			class Student {
+				//study放在哪里？———— Student的原型对象上的，供实例使用
+				//study中的this是谁？ ———— 通过Student实例调用的study，那么study中的this就是Student实例
+				study(){
+					console.log('study被调用了',this)
+				}
+			}
+
+			const d = new Student()
+			btn.onclick = d.study
+			// d.study()
+			// const x = d.study
+			// x()
+
+
+
+
+
+			/* let obj = {
+				haha(){
+					'use strict'
+					console.log('哈哈哈',this)
+				}
+			}
+			const x = obj.haha
+			x() */
+		</script>
+	</body>
+</html>

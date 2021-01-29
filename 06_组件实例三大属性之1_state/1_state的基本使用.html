@@ -27,8 +27,9 @@
 				}
 				changeHot() {
 					//changeHot放在哪里？—— Weather的原型对象上，供实例使用
+					//changeHot中的this是谁？—— 通过Weather实例调用changeHot，则changeHot中this就是Weather实例
 					//将state中的isHot取反
-					console.log('changeHot执行了')
+					console.log('changeHot执行了',this) //此处的this竟然是undefined！！！ 因为两个限制：1.babel编译后全局开启了严格模式 2.类中的方法默认开启了严格模式
 				}
 			}
 			//2.渲染组件
