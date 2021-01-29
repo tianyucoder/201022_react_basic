@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<button id="btn1">按钮一</button>
+		<button id="btn2">按钮二</button>
+		<button onclick="showInfo()">按钮三</button>
+
+		<script type="text/javascript" >
+			const btn1 = document.getElementById('btn1')
+			const btn2 = document.getElementById('btn2')
+
+			btn1.onclick = ()=>{
+				alert('按钮一')
+			}
+			
+			btn2.addEventListener('click',()=>{
+				alert('按钮二')
+			})
+
+			function showInfo() {
+				alert('按钮三')
+			}
+
+		</script>
+
+	</body>
+</html>

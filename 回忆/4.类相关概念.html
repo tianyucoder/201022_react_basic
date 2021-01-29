@@ -40,6 +40,10 @@
 					//speak放在了哪里？ —— Student类的原型对象上，供实例使用。
 					//speak中的this是谁？—— 通过Student实例调用speak时，speak中的this就是Student的实例
 					console.log(`我叫${this.name}，我${this.age}岁了，我在${this.school}学习，我读${this.grade}`)
+					this.study()
+				}
+				study(){
+					console.log('我在努力的学习')
 				}
 			}
 
@@ -49,10 +53,10 @@
 			p1.speak() */
 
 			const s1 = new Student('佩奇',16,'初一')
-			const s2 = new Student('乔治',17,'初二')
+			// const s2 = new Student('乔治',17,'初二')
 			console.log(s1)
-			console.log(s2)
-			// s1.speak()
+			// console.log(s2)
+			s1.speak()
 
 		</script>
 	</body>
