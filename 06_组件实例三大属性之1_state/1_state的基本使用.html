@@ -19,17 +19,35 @@
 				constructor(props){
 					super(props)
 					//state是放在哪里的？—— Weather的组件实例身上的
-					this.state = {isHot:false} //初始化状态
+					this.state = {isHot:true,wind:'七级大风'} //初始化状态
+					/* 
+							下面这行是为了解决changeHot中this指向的问题
+							本质上是：用原型上的changeHot生成一个新的changeHot，这个新的changeHot函数this是组件实例
+					*/
+					this.changeHot = this.changeHot.bind(this)
 				}
+				//render调用了几次？ ———— 1+n次  1是初始化的那次，n是改变state的次数
 				render(){
-					// console.log('@',this) //this是：Weather的实例对象、Weather组件实例对象
-					return <h1 onClick={this.changeHot}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+					// console.log('@',this) //this是组件实例对象
+					return (
+						<div>
+							<h1 onClick={this.changeHot}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+							<h3>今天的风：{this.state.wind}</h3>
+						</div>
+					)
 				}
 				changeHot() {
 					//changeHot放在哪里？—— Weather的原型对象上，供实例使用
 					//changeHot中的this是谁？—— 通过Weather实例调用changeHot，则changeHot中this就是Weather实例
-					//将state中的isHot取反
-					console.log('changeHot执行了',this) //此处的this竟然是undefined！！！ 因为两个限制：1.babel编译后全局开启了严格模式 2.类中的方法默认开启了严格模式
+					
+					//React中的状态不允许直接修改，下面这行就是直接修改
+					// this.state.isHot = false
+					
+					//React中状态的修改必须借助setState这个方法，否则页面不更新。
+					//获取原来的isHot
+					const {isHot} = this.state
+					this.setState({isHot:!isHot,wind:'8级大风'}) //setState干了两件事：1.帮你更改状态 2.重新调用render
+					// console.log('changeHot执行了',this) //若构造器中不进行bind，那么此处的this是undefined； 因为两个限制：1.babel编译后全局开启了严格模式 2.类中的方法默认开启了严格模式
 				}
 			}
 			//2.渲染组件
