@@ -45,7 +45,7 @@
 			// ReactDOM.render(<Person name={p1.name} sex={p1.sex} age={p1.age} address={p1.address} car={p1.car} phone={p1.phone}/>,document.getElementById('test'))
 			/* 
 				下面这行代码中的{...p1}不是复制P1，是展开对象！！！！
-				react+babel让展开运算符能展开一个对象，但仅仅适用于标签属性的传递。
+				react+babel可以让...展开一个对象，但仅仅适用于标签属性的传递。
 			 */
 			ReactDOM.render(<Person {...p1}/>,document.getElementById('test'))
 		</script>
