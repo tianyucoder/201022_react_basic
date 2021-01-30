@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" >
+			let arr = [1,3,5,7,9]
+			let obj = {name:'老刘',age:18,sex:{option1:'男',option2:'女'}}
+
+			// console.log(arr)
+			// console.log(...arr)
+
+			// console.log(obj)
+			// console.log(...obj) //报错
+
+			//严重注意：展开运算符，只有在一个对象中，才能展开另一个对象
+			const obj2 = {...obj,age:20,name:'老王'} //复制了一份obj的内容，生成了一个新的对象给了obj2
+			console.log(obj2)
+
+			/* console.log(obj2 === obj) //false
+			obj.sex.option1 = 900
+			console.log(obj)
+			console.log(obj2) */
+			
+		</script>
+	</body>
+</html>

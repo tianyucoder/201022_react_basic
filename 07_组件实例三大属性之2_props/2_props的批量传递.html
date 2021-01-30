@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>props的基本使用</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel">
+			//1.定义组件
+			class Person extends React.Component{
+				render(){
+					const {name,sex,age,address,car,phone} = this.props
+					return (
+						<ul>
+							<li>姓名：{name}</li>
+							<li>性别：{sex}</li>
+							<li>年龄：{age}</li>
+							<li>住址：{address}</li>
+							<li>座驾：{car}</li>
+							<li>手机：{phone}</li>
+						</ul>
+					)
+				}
+			}
+			//模拟一个人的信息（真实项目开发中，一定是从服务器获取到的）
+			const p1 = {
+				name:'老刘',
+				sex:'女',
+				age:18,
+				address:'地球村',
+				car:'阿特兹',
+				phone:'1388888888',
+			}
+			// console.log('@',...p1) //此处的...p1不奏效
+
+			//2.渲染组件
+			// ReactDOM.render(<Person name={p1.name} sex={p1.sex} age={p1.age} address={p1.address} car={p1.car} phone={p1.phone}/>,document.getElementById('test'))
+			/* 
+				下面这行代码中的{...p1}不是复制P1，是展开对象！！！！
+				react+babel让展开运算符能展开一个对象，但仅仅适用于标签属性的传递。
+			 */
+			ReactDOM.render(<Person {...p1}/>,document.getElementById('test'))
+		</script>
+		
+	</body>
+</html>
