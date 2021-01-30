@@ -5,32 +5,31 @@
 		<title>Document</title>
 	</head>
 	<body>
+		<button id="btn">点我</button>
 		<script type="text/javascript" >
-			class Student {
-				//study放在哪里？———— Student的原型对象上的，供实例使用
-				//study中的this是谁？ ———— 通过Student实例调用的study，那么study中的this就是Student实例
-				study(){
-					console.log('study被调用了',this)
+			//严格模式不允许自定义的函数中this默认指向window
+			/* function demo() {
+				'use strict'
+				console.log('demo',this) //此处的this是window
+			}
+			function demo2() {
+				console.log('demo2',this)
+			}
+			window.demo()
+			demo2() */
+
+			const btn = document.getElementById('btn')
+
+			class Weather {
+				changeHot(){
+					console.log('changeHot',this)
 				}
 			}
+			const w = new Weather()
+			setTimeout(w.changeHot,1000)
+			const x = d.changeHot
+			x()
 
-			const d = new Student()
-			// d.study()
-			// const x = d.study
-			// x()
-
-
-
-
-
-			/* let obj = {
-				haha(){
-					'use strict'
-					console.log('哈哈哈',this)
-				}
-			}
-			const x = obj.haha
-			x() */
 		</script>
 	</body>
 </html>
