@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<input id="input1" type="text">
+		
+		<script type="text/javascript" >
+			const input1 = document.getElementById('input1')
+
+			//原生js中的onchange只有在失去焦点时才会对比前后两次输入的值，若值发生改变才会触发回调
+			input1.onchange = ()=>{
+				console.log('@')
+			}
+		</script>
+	</body>
+</html>

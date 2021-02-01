@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>第一种方式</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+		
+		<script type="text/babel" >
+			//非受控组件：如果组件中的表单数据，是通过节点.value“现用现取”那么就是非受控组件。
+			//1.定义组件
+			class Login extends React.Component{
+				render(){
+					return(
+						<form onSubmit={this.handleLogin}>
+							用户名：<input ref="username" type="text"/>
+							密码：<input ref="password" type="password"/>
+							<button>登录</button>
+						</form>
+					)
+				}
+				handleLogin = (event)=>{
+					event.preventDefault() //阻止默认行为
+					const {username,password} = this.refs //此处获取的是节点！！
+					alert(`用户名为：${username.value}，密码为：${password.value}`)
+				}
+			}
+
+			//2.渲染组件
+			ReactDOM.render(<Login/>,document.getElementById('test'))
+
+		</script>
+	</body>
+</html>

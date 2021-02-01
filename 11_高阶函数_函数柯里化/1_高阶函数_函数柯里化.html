@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>高阶函数_函数柯里化</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+		
+		<script type="text/babel" >
+			class Login extends React.Component{
+				state = {
+					username:'',
+					password:''
+				}
+				render(){
+					return(
+						<form onSubmit={this.handleLogin}>
+							用户名：<input onChange={this.saveFormData('username')} type="text"/>
+							密码：<input onChange={this.saveFormData('password')} type="password"/>
+							<button>登录</button>
+						</form>
+					)
+				}
+
+				saveFormData = (type)=>{
+					return (event)=>{
+						console.log(type,event.target.value)
+					}
+					// console.log(type)
+					// const password = event.target.value
+					// console.log(event.target.value)
+					// this.setState({password:event.target.value})
+				}
+
+				//用户名发生改变的回调
+				/* saveUserName = (event)=>{
+					this.setState({username:event.target.value})
+				} */
+
+				//密码发生改变的回调
+				/* savePassword = (event)=>{
+					this.setState({password:event.target.value})
+				} */
+
+				//登录按钮的回调
+				handleLogin = (event)=>{
+					event.preventDefault() //阻止默认行为
+					const {username,password} = this.state //不再节点.value获取输入了，去状态中获取
+					alert(`用户名为：${username},密码为：${password}`)
+				}
+			}
+
+			//2.渲染组件
+			ReactDOM.render(<Login/>,document.getElementById('test'))
+
+		</script>
+	</body>
+</html>
