@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" >
+
+			//普通写法实现求和————多个参数一次性接收完毕
+			/* function sum(a,b,c) {
+				return a+b+c
+			} */
+
+			//柯里化的写法实现求和————多次接收参数，最后统一处理
+			function sum (a){
+				return (b)=>{
+					return (c)=>{
+						return a+b+c
+					}
+				}
+			}
+
+			const result = sum(3)(4)(5)
+			console.log(result)
+		</script>
+	</body>
+</html>
