@@ -13,8 +13,8 @@
 			const btn1 = document.getElementById('btn1')
 			const btn2 = document.getElementById('btn2')
 
-			btn1.onclick = ()=>{
-				alert('按钮一')
+			btn1.onclick = (event)=>{
+				console.log('按钮一',event)
 			}
 			
 			btn2.addEventListener('click',()=>{

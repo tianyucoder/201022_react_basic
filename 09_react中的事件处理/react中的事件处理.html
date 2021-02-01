@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>react中的事件处理</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel">
+		/* 
+			1.React底层并没有使用原生的DOM事件，而是采用了合成事件（自定义事件）。
+			2.React自己实现了一套高效的事件系统，包含：事件注册、事件绑定、事件存储、事件分发，等全套逻辑
+				在原生DOM事件体系的基础上有了很大的改进：减少了内存的消耗、最大程度上解决了浏览器兼容性问题。
+			3.React中事件都是通过事件委托的方式实现的。
+			4.React中通过onXxxx去绑定事件（注意大小写）
+			5.可以通过event.target得到发生事件的DOM元素
+		*/
+			//1.定义组件
+			class Demo extends React.Component{
+				render(){
+					return(
+						<div>
+							<input ref="input1" type="text"/>
+							<button onClick={this.showData}>点我提示左侧数据</button>&nbsp;
+							<input onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+						</div>
+					)
+				}
+				//点击按钮的回调
+				showData = (event)=>{
+					// console.log(event.target) //此处的event.target是按钮，因为我们给按钮绑定的事件
+					alert(this.refs.input1.value)
+				}
+				//失去焦点的回调
+				showData2 = (event)=>{
+					alert(event.target.value)
+				}
+			}
+			//2.渲染组件
+			ReactDOM.render(<Demo/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
