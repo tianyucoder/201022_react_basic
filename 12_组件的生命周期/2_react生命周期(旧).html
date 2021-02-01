@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>react生命周期(旧)</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+
+			class Demo extends React.Component{
+				//构造器
+				constructor(props){
+					super(props)
+					console.log('---constructor---')
+					this.state = {sum:0}
+				}
+
+				//组件将要挂载
+				componentWillMount(){
+					console.log('---componentWillMount---')
+				}
+
+				//初始化+状态更新时候调用
+				render(){
+					console.log('---render---')
+					return (
+						<div>
+							<h2>当前求和为：{this.state.sum}</h2>
+							<button onClick={this.add}>+1</button>
+							<button onClick={this.death}>卸载组件</button>
+							<button onClick={this.qiangzhi}>不改变任何state里的东西，强制更新一下</button>
+						</div>
+					)
+				}
+
+				//组件挂载完毕
+				componentDidMount(){
+					console.log('---componentDidMount---')
+				}
+
+				//组件将要卸载
+				componentWillUnmount(){
+					console.log('---componentWillUnmount---')
+				}
+
+				//控制组件是否可以更新（阀门）
+				shouldComponentUpdate(){
+					console.log('---shouldComponentUpdate---')
+					return false
+				}
+
+				//组件将要更新
+				componentWillUpdate(){
+					console.log('---componentWillUpdate---')
+				}
+
+				//组件更新完毕
+				componentDidUpdate(){
+					console.log('---componentDidUpdate---')
+				}
+
+				//加法按钮的回调
+				add = ()=>{
+					let {sum} = this.state
+					sum++
+					this.setState({sum})
+				}
+			
+				//卸载组件按钮的回调
+				death = ()=>{
+					ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+				}
+				
+				//强制更新按钮的回调
+				qiangzhi = ()=>{
+					this.forceUpdate()
+				}
+			}
+
+			ReactDOM.render(<Demo/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>

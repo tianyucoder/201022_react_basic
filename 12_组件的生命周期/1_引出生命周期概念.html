@@ -14,8 +14,9 @@
 		<div id="test"></div>
 
 		<script type="text/babel" >
-
+			
 			class Demo extends React.Component{
+				//生命周期回调函数 <=> 生命周期钩子函数 <=>  生命周期函数 <=>  生命周期钩子
 				state = {opacity:1}
 
 				render(){ //render调用的次数是：1+N 1是初始化的那次，N是状态更新的次数
@@ -23,14 +24,15 @@
 					return (
 						<div>
 							<h2 style={{opacity:this.state.opacity}}>分手了怎么办？</h2>
-							<button>不活了</button>
+							<button onClick={this.death}>不活了</button>
 						</div>
 					)
 				}
-
-				componentDidMount(){ //只调用一次
+				
+				//组件挂载完毕——只调用一次
+				componentDidMount(){ 
 					console.log('componentDidMount')
-					setInterval(()=>{
+					this.timeId = setInterval(()=>{
 						//1.获取原来的透明度
 						let {opacity} = this.state
 						//2.透明度-0.1
@@ -41,6 +43,16 @@
 					},200)
 				}
 				
+				//组件将要卸载——只调用一次
+				componentWillUnmount(){
+					console.log('componentWillUnmount')
+					clearInterval(this.timeId)
+				}
+
+				death = ()=>{
+					//调用指定API卸载组件
+					ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+				}
 			}
 
 			ReactDOM.render(<Demo/>,document.getElementById('test'))
