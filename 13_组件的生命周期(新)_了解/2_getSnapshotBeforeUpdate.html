@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>1_react生命周期(新)</title>
+		<style>
+			.parent{
+				background-color: orange;
+				padding: 10px;
+			}
+			.child{
+				background-color: gray;
+				padding: 10px;
+			}
+		</style>
+		<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+				/* 
+						getSnapshotBeforeUpdate有什么用？———— 在页面真正发生更新之前，保留下原来页面中DOM的信息
+						注意点：
+							1.此方法必须配合componentDidUpdate使用。
+							2.只有返回的是DOM相关的值，才有意义。
+							3.componentDidUpdate会收到三个参数：preProps,preState,snapshotValue
+				*/
+
+			class A extends React.Component{
+				state = {
+					address:'北七家镇',
+					carname:'阿特兹',
+				}
+				render(){
+					return (
+						<div className="parent">
+							<h1>我是A组件</h1>
+							<ul>
+								<li>{this.state.address}</li>
+								<li>{this.state.carname}</li>
+							</ul>
+							<button onClick={this.change}>更换地址与车名</button>
+							<Demo address={this.state.address} carname={this.state.carname}/>
+						</div>
+					)
+				}
+				change = ()=>{
+					this.setState({
+						address:'北七家镇2',
+						carname:'阿特兹2'
+					})
+				}
+			}
+
+			class Demo extends React.Component{
+				constructor(props){
+					console.log('---constructor---')
+					super(props)
+					this.state = {sum:0}
+				}
+
+				render(){
+					console.log('---render---')
+					return(
+						<div className="child">
+							<h2 ref="title">当前求和为：{this.state.sum}</h2>	
+							<button onClick={this.add}>+1</button>
+						</div>
+					)
+				}
+
+				//获取快照在更新之前
+				getSnapshotBeforeUpdate(){
+					console.log('---getSnapshotBeforeUpdate---')
+					// console.log(this.refs.title.innerText)
+					return this.refs.title.innerText
+				}
+
+				componentDidUpdate(preProps,preState,snapshotValue){
+					console.log('---componentDidUpdate---',preProps,preState,snapshotValue)
+				}
+
+				add = ()=>{
+					const {sum} = this.state
+					this.setState({sum:sum+1})
+				}
+			}
+			
+			ReactDOM.render(<A/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
