@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>父组件render流程</title>
+		<style>
+			.a{
+				background-color: orange;
+				padding: 10px;
+			}
+			.b{
+				background-color: skyblue;
+				padding: 10px;
+			}
+		</style>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支持react操作DOM -->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+			//定义一个A组件
+			class A extends React.Component{
+				state = {carName:'阿特兹'}
+
+				//组件将要接收props（第一次不算）
+				componentWillReceiveProps(){
+					console.log('A---componentWillReceiveProps---')
+				}
+
+				render(){
+					// console.log('A---render---')
+					return (
+						<div className="a">
+							<h2>我是A组件，我有一台车：{this.state.carName}</h2>
+							<h4>我家在：{this.props.address}</h4>
+							<button onClick={this.changeCar}>发达了，换车！</button>
+							<B/>
+						</div>
+					)
+				}
+
+				changeCar = ()=>{
+					this.setState({carName:"奔驰c63"})
+				}
+			}
+
+			//定义一个B组件
+			class B extends React.Component{
+				render(){
+					console.log('B---render---')
+					return (
+						<div className="b">
+							<h2>我是B组件，我收到了父亲给我的车：{this.props.cheming}</h2>	
+						</div>
+					)
+				}
+
+				//组件将要接收props（第一次不算）
+				/* componentWillReceiveProps(){
+					console.log('B---componentWillReceiveProps---')
+				}
+
+				shouldComponentUpdate(){
+					console.log('B---shouldComponentUpdate---')
+					return true
+				}
+
+				componentWillUpdate(){
+					console.log('B---componentWillUpdate---')
+				}
+
+				componentDidUpdate(){
+					console.log('B---componentDidUpdate---')
+				} */
+			}
+			
+			ReactDOM.render(<A address="北七家镇"/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
