@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>1_react生命周期(新)</title>
+		<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+
+			class Demo extends React.Component{
+				state = {sum:0}
+
+				render(){
+					return(
+						<div>
+							<h2>当前求和为：{this.state.sum}</h2>	
+							<button onClick={this.add}>+1</button>
+						</div>
+					)
+				}
+
+				UNSAFE_componentWillMount(){
+					console.log('---componentWillMount---')
+				}
+
+				UNSAFE_componentWillUpdate(){
+					console.log('---componentWillUpdate---')
+				}
+
+				UNSAFE_componentWillReceiveProps(){
+					console.log('---componentWillReceiveProps---')
+				}
+
+				add = ()=>{
+					const {sum} = this.state
+					this.setState({sum:sum+1})
+				}
+			}
+			
+			ReactDOM.render(<Demo/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
