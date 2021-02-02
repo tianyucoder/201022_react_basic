@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>DOM的Diffing算法</title>
+		<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+
+			class Person extends React.Component{
+				state = {
+					persons:[
+						{id:'atguigu001',name:'小张',age:18},
+						{id:'atguigu002',name:'小李',age:19},
+					]
+				}
+				render(){
+					return (
+						<div>
+							<button onClick={this.addWang}>添加一个小王</button>
+							<h2>使用数据遍历时候的索引值（index）作为key</h2>
+							<ul>
+								{
+									this.state.persons.map((p,index)=>{
+										return (
+											<li key={index}>
+												{p.name}----{p.age}
+												<input type="text"/>
+											</li>
+										)
+									})
+								}
+							</ul>
+
+							<br/>	
+							<br/>	
+							<hr/>
+							<br/>	
+							<br/>	
+
+							<h2>使用数据的唯一标识（id）作为key</h2>
+							<ul>
+								{
+									this.state.persons.map((p)=>{
+										return (
+											<li key={p.id}>
+												{p.name}----{p.age}
+												<input type="text"/>
+											</li>
+										)
+									})
+								}
+							</ul>
+						</div>
+					)
+				}
+				
+				//添加小王的回调
+				addWang = ()=>{
+					const {persons} = this.state
+					const wang = {id:'atguigu003',name:'小王',age:20}
+					
+					// persons.unshift(wang)
+					// this.setState({persons})
+
+					this.setState({persons:[wang,...persons]})
+				}
+			}
+
+			ReactDOM.render(<Person/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
