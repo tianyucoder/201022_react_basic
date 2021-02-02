@@ -13,9 +13,14 @@
 		<script type="text/babel" >
 
 			class Demo extends React.Component{
-				state = {sum:0}
+				constructor(props){
+					console.log('---constructor---')
+					super(props)
+					this.state = {sum:0}
+				}
 
 				render(){
+					console.log('---render---')
 					return(
 						<div>
 							<h2>当前求和为：{this.state.sum}</h2>	
@@ -24,7 +29,25 @@
 					)
 				}
 
-				UNSAFE_componentWillMount(){
+				add = ()=>{
+					const {sum} = this.state
+					this.setState({sum:sum+1})
+				}
+
+				/* 
+					getDerivedStateFromProps有什么用？
+						粗略的说：state 的值在任何时候都取决于 props
+						详细的说：
+							1.直接复制 props 到 state 上；
+							2.经过一些逻辑比较了props和state的不同然后，去更新state
+				*/			
+				static getDerivedStateFromProps(props,state){
+					console.log('---getDerivedStateFromProps---',props,state)
+					return props //return {address: "北七家镇", carname: "阿特兹"}
+				}
+
+				//#region 
+				/* UNSAFE_componentWillMount(){
 					console.log('---componentWillMount---')
 				}
 
@@ -34,15 +57,11 @@
 
 				UNSAFE_componentWillReceiveProps(){
 					console.log('---componentWillReceiveProps---')
-				}
-
-				add = ()=>{
-					const {sum} = this.state
-					this.setState({sum:sum+1})
-				}
+				} */
+				//#endregion
 			}
 			
-			ReactDOM.render(<Demo/>,document.getElementById('test'))
+			ReactDOM.render(<Demo address="北七家镇" carname="阿特兹"/>,document.getElementById('test'))
 		</script>
 	</body>
 </html>
