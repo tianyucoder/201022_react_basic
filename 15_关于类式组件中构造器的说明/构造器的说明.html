@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>构造器的说明</title>
+		<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+		
+			class Weather extends React.Component{
+				constructor(props){
+					super(props)
+					this.state = {isHot:true}
+					console.log('@',this.props)
+				}
+				render(){
+					const {isHot} = this.state
+					return (
+						<div>
+							<h2 onClick={this.changeHot}>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
+							<h2>收到的school是：{this.props.school}</h2>
+						</div>
+					)
+				}
+				changeHot = ()=>{
+					const {isHot} = this.state
+					this.setState({isHot:!isHot})
+				}
+			}
+
+			ReactDOM.render(<Weather school="atguigu"/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
